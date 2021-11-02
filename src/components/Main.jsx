@@ -60,7 +60,7 @@ export default function Main() {
   return (
     <>
       <div className="container">
-        <p>Pass in any number and get the resulting rotary phone letter code combinations.</p>
+        <p>Click on the Phone Pad and get the resulting letter code combinations.</p>
         <div class="dial-pad" onClick={onChangeInput}>
           <a href="#" class="one" id="1">1<div> &nbsp;</div></a>
           <a href="#" class="two" id="2">2<div>abc</div></a>
