@@ -1,11 +1,12 @@
 import { useState } from "react";
-
+import '../App.css'
 export default function Main() {
+  const [input, setInput] = useState("")
   const [codes, setCodes] = useState([]);
   const [formattedCodes, setFormattedCodes] = useState("");
 
   const generateLetterCodes = () => {
-    const number = document.getElementById("number").value;
+    const number= input
 
     //setting the numbers as phone display
     if (!number) {
@@ -48,30 +49,41 @@ export default function Main() {
       setFormattedCodes(html);
     }
   };
+  const onChangeInput = event => {
+    setInput(input  + event.target.id)
+    validateNumericInput(event)
 
+  };
   //Validating Input to be accept only numeric values
   const validateNumericInput = (e) => !/[\d]/.test(e.key) && e.preventDefault();
 
   return (
-    <> 
-    <div className="container">
-      <p>Pass in any number and get the resulting rotary phone letter code combinations.</p>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Rotarydial.JPG" alt="Rotary Phone" className="sample" />
-      <input
-        type="text"
-        name="text"
-        id="number"
-        minLength={1}
-        maxLength={10}
-        onKeyPress={validateNumericInput}
-        placeholder="Enter your number"
-        data-testid="input"
-      />
-      <button type="submit" onClick={generateLetterCodes} data-testid="button">
+    <>
+      <div className="container">
+        <p>Pass in any number and get the resulting rotary phone letter code combinations.</p>
+        <div class="dial-pad" onClick={onChangeInput}>
+          <a href="#" class="one" id="1">1<div> &nbsp;</div></a>
+          <a href="#" class="two" id="2">2<div>abc</div></a>
+          <a href="#" class="three" id="3">3<div>def</div></a>
+          <br />
+          <a href="#" class="four" id="4">4<div>ghi</div></a>
+          <a href="#" class="five" id="5">5<div>jkl</div></a>
+          <a href="#" class="six" id="6">6<div>mno</div></a>
+          <br />
+          <a href="#" class="seven" id="7">7<div>pqrs</div></a>
+          <a href="#" class="eight" id="8">8<div>tuv</div></a>
+          <a href="#" class="nine" id="9">9<div>wxyz</div></a>
+          <br />
+          <a href="#">*</a>
+          <a href="#" class="zero">0</a>
+          <a href="#">#</a>
+        </div>
+        <div className="userInput">{input} </div>
+        <button type="submit" onClick={generateLetterCodes} data-testid="button">
         Generate Letter Codes
-      </button>
-    </div>
-    {!!codes.length && formattedCodes && (
+        </button>        
+      </div>
+      {!!codes.length && formattedCodes && (
         <div className="result">
           <h2>Result ({codes.length.toLocaleString()} combinations) :</h2>
           <span dangerouslySetInnerHTML={{ __html: formattedCodes }} className="output" />
